@@ -1,4 +1,4 @@
-/* PptxGenJS 3.4.0-beta @ 2020-09-01T21:42:48.422Z */
+/* PptxGenJS 3.4.0-beta2 @ 2020-09-01T22:22:00.787Z */
 'use strict';
 
 var JSZip = require('jszip');
@@ -2479,7 +2479,7 @@ function genXmlTextBody(slideObj) {
         /* C: Append 'endParaRPr' (when needed) and close current open paragraph
          * NOTE: (ISSUE#20, ISSUE#193): Add 'endParaRPr' with font/size props or PPT default (Arial/18pt en-us) is used making row "too tall"/not honoring options
          */
-        if (slideObj._type === SLIDE_OBJECT_TYPES.tablecell && (opts.fontSize || opts.fontFace)) {
+        if ((slideObj._type === SLIDE_OBJECT_TYPES.tablecell || slideObj._type === 'text') && (opts.fontSize || opts.fontFace)) {
             if (opts.fontFace) {
                 strSlideXml += "<a:endParaRPr lang=\"" + (opts.lang || 'en-US') + "\"" + (opts.fontSize ? " sz=\"" + Math.round(opts.fontSize) + "00\"" : '') + ' dirty="0">';
                 strSlideXml += "<a:latin typeface=\"" + opts.fontFace + "\" charset=\"0\"/>";
